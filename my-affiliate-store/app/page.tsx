@@ -16,8 +16,7 @@ export default function Home() {
         <div className="flex items-center justify-center p-6">
 	<a href="#">
           <Image
-            src="
-https://offer.alibaba.com/cps/bn67ksob?bm=cps&src=saf&productId=1601557435333" // ضع هنا رابط الصورة الفعلي
+            src="https://s.alicdn.com/@sc04/kf/H637844392f9540a19f3c1c495918a596P.jpg?avif=close&webp=close"
             alt="Trendy Recyclable Leather Backpack"
             width={500}
             height={500}
