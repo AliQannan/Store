@@ -5,14 +5,7 @@ export default function Home() {
 	   <div className="min-h-screen bg-gray-100 p-6 sm:p-12 font-sans">
       <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-md overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-8">
 
-      <Image
-      src="https://drive.google.com/file/d/1JRqYc8jitdkTytgeC-oIVdbv3I68WtYn/"
-      alt="logo"
-      width={200}
-      height={200}
-      className="rounded-lg"
-      />
-        {/* Left: Product Image */}
+       {/* Left: Product Image */}
         <div className="flex items-center justify-center p-6">
 	<a href="#">
           <Image
