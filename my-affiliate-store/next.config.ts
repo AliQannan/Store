@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
 	 images: {
-    domains: ["ae01.alicdn.com"], // ضع هنا أي domain من Alibaba أو أي مصدر خارجي
+    domains: ["s.alicdn.com"], // ضع هنا أي domain من Alibaba أو أي مصدر خارجي
   },
 };
 
