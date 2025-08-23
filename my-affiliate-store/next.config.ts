@@ -1,7 +1,9 @@
-import type { NextConfig } from "next";
+gmport type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+	 images: {
+    domains: ["ae01.alicdn.com"], // ضع هنا أي domain من Alibaba أو أي مصدر خارجي
+  },
 };
 
 export default nextConfig;
