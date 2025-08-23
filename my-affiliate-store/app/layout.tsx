@@ -35,6 +35,13 @@ export default function RootLayout({
       <html lang="en">
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           <header className="flex justify-end items-center p-4 gap-4 h-16">
+	  <Image
+            src="https://drive.google.com/file/d/1JRqYc8jitdkTytgeC-oIVdbv3I68WtYn/view?usp=drive_link" // ضع هنا رابط الصورة الفعلي
+            alt="Trendy Recyclable Leather Backpack"
+            width={500}
+            height={500}
+            className="rounded-lg"
+          /><
             <SignedOut>
               <SignInButton />
               <SignUpButton>
