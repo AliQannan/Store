@@ -9,7 +9,7 @@ export default function Home() {
         <div className="flex items-center justify-center p-6">
 	<a href="https://www.alibaba.com/product-detail/2025-Best-selling-Trendy-Recyclable-Leather_1601524414012.html?xp=-Rw-__c9Hxo-IHk9aSz84QVTIVHyi8O38_GQjIbTqH5_iod4IvjFQ1WlfI1fFbGzZBFWTHWdf4i0Pz5qpP40F5QOO3bFWWWknbmEAKiH3pYsMbeanHAIqwcTEART57S-&cps_sk=bn67ksob&bm=cps&src=saf&productId=1601524414012">
           <Image
-            src="https://s.alicdn.com/@sc04/kf/Hea50d3e81d9d48eaa666c06e79f4114eD.jpg?avif=close&webp=close" // ضع هنا رابط الصورة الفعلي
+            src="https://offer.alibaba.com/cps/bn67ksob?bm=cps&src=saf&productId=1601557435333" // ضع هنا رابط الصورة الفعلي
             alt="Trendy Recyclable Leather Backpack"
             width={500}
             height={500}
