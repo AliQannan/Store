@@ -7,13 +7,14 @@ export default function Home() {
 
         {/* Left: Product Image */}
         <div className="flex items-center justify-center p-6">
+	<a href="https://www.alibaba.com/product-detail/2025-Best-selling-Trendy-Recyclable-Leather_1601524414012.html?xp=-Rw-__c9Hxo-IHk9aSz84QVTIVHyi8O38_GQjIbTqH5_iod4IvjFQ1WlfI1fFbGzZBFWTHWdf4i0Pz5qpP40F5QOO3bFWWWknbmEAKiH3pYsMbeanHAIqwcTEART57S-&cps_sk=bn67ksob&bm=cps&src=saf&productId=1601524414012">
           <Image
-            src="https://ae01.alicdn.com/kf/H2c34b7f1b7f3421a8b7c3d4a8f2e1b3cdK.jpg" // ضع هنا رابط الصورة الفعلي
+            src="https://s.alicdn.com/@sc04/kf/Hb6eeae95d85f44c8a3083e54dbfa35ecu.jpg?avif=close&webp=close" // ضع هنا رابط الصورة الفعلي
             alt="Trendy Recyclable Leather Backpack"
             width={500}
             height={500}
             className="rounded-lg"
-          />
+          /></a>
         </div>
 
         {/* Right: Product Info */}
@@ -45,7 +46,7 @@ export default function Home() {
               Add to Cart
             </a>
             <a
-              href="#"
+              href="https://offer.alibaba.com/cps/bn67ksob?bm=cps&src=saf&productId=1601524414012"
               className="border border-gray-400 text-gray-800 font-semibold px-6 py-3 rounded-lg text-center hover:bg-gray-100 transition"
             >
               Buy Now
