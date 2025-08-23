@@ -6,7 +6,7 @@ export default function Home() {
       <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-md overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-8">
 
       <Image
-      src="https://drive.google.com/file/d/1JRqYc8jitdkTytgeC-oIVdbv3I68WtYn/view?usp=sharing"
+      src="https://drive.google.com/file/d/1JRqYc8jitdkTytgeC-oIVdbv3I68WtYn/view"
       alt="logo"
       width={200}
       height={200}
