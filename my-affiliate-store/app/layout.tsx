@@ -10,7 +10,8 @@ import {
 import Image from 'next/image'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
-
+import GSTLogo from '../components/GSTLogo';
+// In your JSX
 // استيراد خطوط Google
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -40,14 +41,9 @@ export default function RootLayout({
           <header className="flex justify-between items-center p-4 gap-4 h-16 shadow-md">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <Image
-                src="/logo.png" // ضع الصورة هنا في public/logo.png
-                alt="Logo"
-                width={120}
-                height={40}
-                className="object-contain"
-              />
-            </div>
+
+<GSTLogo size={120} className="mx-auto" />
+           </div>
 
             {/* أزرار تسجيل الدخول والتسجيل أو حساب المستخدم */}
             <div className="flex gap-4 items-center">
