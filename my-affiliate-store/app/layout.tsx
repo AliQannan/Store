@@ -23,7 +23,7 @@ const geistMono = Geist_Mono({
 
 // بيانات الموقع
 export const metadata: Metadata = {
-  title: 'GST',
+  title: 'GST Health',
   description: 'Choose',
 }
 
@@ -34,26 +34,23 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" className="dark">
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 text-gray-900`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300`}
         >
-          <header className="flex justify-between items-center px-8 h-16 border-b border-gray-200 bg-white shadow-sm">
+          {/* Navbar */}
+          <header className="flex justify-between items-center px-8 h-16 border-b border-gray-200 bg-white shadow-sm dark:bg-gray-950 dark:border-gray-800 transition-colors duration-300">
+            
             {/* Logo */}
             <div className="flex items-center">
-              <div className="flex items-center text-4xl font-extrabold tracking-tight">
-                <span className="text-black">G</span>
-                <span className="text-gray-700">S</span>
-                <span
-                  className="text-transparent font-extrabold px-2"
-                  style={{
-                    backgroundImage:
-                      "repeating-linear-gradient(45deg, black 0 8px, white 8px 16px)",
-                    WebkitBackgroundClip: 'text',
-                    backgroundClip: 'text',
-                  }}
-                >
-                  T
+              <div className="relative flex items-center justify-center w-16 h-16 rounded-full border-2 border-black dark:border-white">
+                {/* GST Letters */}
+                <span className="text-xl font-extrabold tracking-wide text-black dark:text-white">
+                  GST
+                </span>
+                {/* Medical Cross */}
+                <span className="absolute -top-2 -right-2 flex items-center justify-center w-5 h-5 rounded-sm bg-black dark:bg-white">
+                  <span className="block w-3 h-3 bg-white dark:bg-black"></span>
                 </span>
               </div>
             </div>
@@ -62,12 +59,12 @@ export default function RootLayout({
             <div className="flex gap-3 items-center">
               <SignedOut>
                 <SignInButton>
-                  <button className="border border-gray-300 text-gray-800 hover:bg-gray-100 transition rounded-full font-medium text-sm sm:text-base h-10 sm:h-11 px-5 cursor-pointer">
+                  <button className="border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition rounded-full font-medium text-sm sm:text-base h-10 sm:h-11 px-5 cursor-pointer">
                     Sign In
                   </button>
                 </SignInButton>
                 <SignUpButton>
-                  <button className="bg-black text-white hover:bg-gray-800 transition rounded-full font-medium text-sm sm:text-base h-10 sm:h-11 px-5 cursor-pointer">
+                  <button className="bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition rounded-full font-medium text-sm sm:text-base h-10 sm:h-11 px-5 cursor-pointer">
                     Sign Up
                   </button>
                 </SignUpButton>
