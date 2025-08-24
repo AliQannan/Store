@@ -42,7 +42,9 @@ export default function RootLayout({
             {/* Logo */}
             <div className="flex-shrink-0">
 
-<GSTLogo size={120} className="mx-auto" />
+<div size={120} className="mx-auto" >
+  GS<span className="text-white" >T</span>
+  </div>
            </div>
 
             {/* أزرار تسجيل الدخول والتسجيل أو حساب المستخدم */}
