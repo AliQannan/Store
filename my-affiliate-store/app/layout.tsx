@@ -1,6 +1,3 @@
-"use client"
-
-import { useState } from "react"
 import { type Metadata } from "next"
 import {
   ClerkProvider,
@@ -35,15 +32,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const [darkMode, setDarkMode] = useState(true)
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode)
-  }
-
   return (
     <ClerkProvider>
-      <html lang="en" className={darkMode ? "dark" : ""}>
+      <html lang="en" className="dark"> {/* حدد dark أو أزلها للوضع الفاتح */}
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300`}
         >
@@ -70,15 +61,8 @@ export default function RootLayout({
               </div>
             </div>
 
-            {/* Auth buttons + Dark Mode Toggle */}
+            {/* Auth buttons */}
             <div className="flex gap-3 items-center">
-              <button
-                onClick={toggleDarkMode}
-                className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full transition"
-              >
-                {darkMode ? "Light" : "Dark"}
-              </button>
-
               <SignedOut>
                 <SignInButton>
                   <button className="border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition rounded-full font-medium text-sm sm:text-base h-10 sm:h-11 px-5 cursor-pointer">
