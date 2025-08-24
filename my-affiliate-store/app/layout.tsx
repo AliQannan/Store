@@ -7,11 +7,9 @@ import {
   SignedOut,
   UserButton,
 } from '@clerk/nextjs'
-import Image from 'next/image'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
-import GSTLogo from '../components/GSTLogo';
-// In your JSX
+
 // استيراد خطوط Google
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -26,7 +24,7 @@ const geistMono = Geist_Mono({
 // بيانات الموقع
 export const metadata: Metadata = {
   title: 'GST',
-  description: 'chose',
+  description: 'Choose',
 }
 
 export default function RootLayout({
@@ -38,32 +36,42 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <header className="flex justify-between items-center p-4 gap-4 h-16 shadow-md">
+          <header className="flex justify-between items-center px-6 h-16 shadow-md bg-white">
             {/* Logo */}
-            <div className="flex-shrink-0">
-
-<div className="flex items-center justify-center mx-auto text-5xl font-extrabold tracking-widest">
-  <span className="text-green-600">G</span>
-  <span className="text-black">S</span>
-  <span className="relative inline-block">
-    <span className="text-white bg-black px-2 py-1 rounded-md shadow-md">T</span>
-    <span className="absolute -top-2 -right-3 w-3 h-3 bg-red-600 rounded-full"></span>
-    <span className="absolute -bottom-2 -left-3 w-3 h-3 bg-green-600 rounded-full"></span>
-  </span>
-</div>
-
-           </div>
+            <div className="flex items-center">
+              <div className="flex items-center text-4xl sm:text-5xl font-extrabold tracking-widest">
+                <span className="text-green-600">G</span>
+                <span className="text-black">S</span>
+                <span className="relative inline-block">
+                  {/* T مع كوفية */}
+                  <span
+                    className="text-transparent font-extrabold px-2 py-1 rounded-md shadow-md"
+                    style={{
+                      backgroundImage:
+                        "repeating-linear-gradient(45deg, black 0 10px, white 10px 20px)",
+                      WebkitBackgroundClip: "text",
+                      backgroundClip: "text",
+                    }}
+                  >
+                    T
+                  </span>
+                  {/* النقاط الملونة للهوية الفلسطينية */}
+                  <span className="absolute -top-2 -right-3 w-3 h-3 bg-red-600 rounded-full"></span>
+                  <span className="absolute -bottom-2 -left-3 w-3 h-3 bg-green-600 rounded-full"></span>
+                </span>
+              </div>
+            </div>
 
             {/* أزرار تسجيل الدخول والتسجيل أو حساب المستخدم */}
-            <div className="flex gap-4 items-center">
+            <div className="flex gap-3 items-center">
               <SignedOut>
                 <SignInButton>
-                  <button className="bg-gray-200 text-black rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
+                  <button className="bg-gray-100 hover:bg-gray-200 transition text-black rounded-full font-medium text-sm sm:text-base h-10 sm:h-11 px-5 cursor-pointer">
                     Sign In
                   </button>
                 </SignInButton>
                 <SignUpButton>
-                  <button className="bg-[#6c47ff] text-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
+                  <button className="bg-[#6c47ff] hover:bg-[#5635d6] transition text-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-11 px-5 cursor-pointer">
                     Sign Up
                   </button>
                 </SignUpButton>
@@ -75,10 +83,9 @@ export default function RootLayout({
           </header>
 
           {/* محتوى الصفحة */}
-          <main>{children}</main>
+          <main className="px-6 py-8">{children}</main>
         </body>
       </html>
     </ClerkProvider>
   )
 }
-
