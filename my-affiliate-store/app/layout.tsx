@@ -35,43 +35,39 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <header className="flex justify-between items-center px-6 h-16 shadow-md bg-white">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 text-gray-900`}
+        >
+          <header className="flex justify-between items-center px-8 h-16 border-b border-gray-200 bg-white shadow-sm">
             {/* Logo */}
             <div className="flex items-center">
-              <div className="flex items-center text-4xl sm:text-5xl font-extrabold tracking-widest">
-                <span className="text-green-600">G</span>
-                <span className="text-black">S</span>
-                <span className="relative inline-block">
-                  {/* T مع كوفية */}
-                  <span
-                    className="text-transparent font-extrabold px-2 py-1 rounded-md shadow-md"
-                    style={{
-                      backgroundImage:
-                        "repeating-linear-gradient(45deg, black 0 10px, white 10px 20px)",
-                      WebkitBackgroundClip: "text",
-                      backgroundClip: "text",
-                    }}
-                  >
-                    T
-                  </span>
-                  {/* النقاط الملونة للهوية الفلسطينية */}
-                  <span className="absolute -top-2 -right-3 w-3 h-3 bg-red-600 rounded-full"></span>
-                  <span className="absolute -bottom-2 -left-3 w-3 h-3 bg-green-600 rounded-full"></span>
+              <div className="flex items-center text-4xl font-extrabold tracking-tight">
+                <span className="text-black">G</span>
+                <span className="text-gray-700">S</span>
+                <span
+                  className="text-transparent font-extrabold px-2"
+                  style={{
+                    backgroundImage:
+                      "repeating-linear-gradient(45deg, black 0 8px, white 8px 16px)",
+                    WebkitBackgroundClip: 'text',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  T
                 </span>
               </div>
             </div>
 
-            {/* أزرار تسجيل الدخول والتسجيل أو حساب المستخدم */}
+            {/* Auth buttons */}
             <div className="flex gap-3 items-center">
               <SignedOut>
                 <SignInButton>
-                  <button className="bg-gray-100 hover:bg-gray-200 transition text-black rounded-full font-medium text-sm sm:text-base h-10 sm:h-11 px-5 cursor-pointer">
+                  <button className="border border-gray-300 text-gray-800 hover:bg-gray-100 transition rounded-full font-medium text-sm sm:text-base h-10 sm:h-11 px-5 cursor-pointer">
                     Sign In
                   </button>
                 </SignInButton>
                 <SignUpButton>
-                  <button className="bg-[#6c47ff] hover:bg-[#5635d6] transition text-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-11 px-5 cursor-pointer">
+                  <button className="bg-black text-white hover:bg-gray-800 transition rounded-full font-medium text-sm sm:text-base h-10 sm:h-11 px-5 cursor-pointer">
                     Sign Up
                   </button>
                 </SignUpButton>
