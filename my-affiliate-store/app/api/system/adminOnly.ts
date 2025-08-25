@@ -1,37 +1,29 @@
-import { NextRequest, NextResponse } from 'next/server';
 import { getAuth } from '@clerk/nextjs/server';
-import { PrismaClient } from '@prisma/client';
+import { clerkClient } from '@clerk/nextjs/server';
 
-const prisma = new PrismaClient();
+export const GET = async (req: NextRequest) => {
+  const { userId } = await getAuth(req);
 
-/**
- * Middleware للتحقق من أن المستخدم موجود في جدول Admin
- * @param req NextRequest
- * @param handler دالة async ترجع NextResponse عند نجاح التحقق
- */
-export async function adminOnly(
-  req: NextRequest,
-  handler: () => Promise<NextResponse>
-) {
-  // الحصول على بيانات المستخدم من Clerk
-  const { userId, emailAddresses } = getAuth(req);
-
-  if (!userId || !emailAddresses || emailAddresses.length === 0) {
+  if (!userId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  // أخذ البريد الرئيسي للمستخدم
-  const userEmail = emailAddresses[0].emailAddress;
+  try {
+    // الحصول على كائن المستخدم الكامل
+    const user = await clerkClient.users.getUser(userId);
 
-  // التحقق من وجود المستخدم في جدول Admin
-  const adminUser = await prisma.adminUser.findUnique({
-    where: { email: userEmail },
-  });
+    // الوصول إلى البريد الإلكتروني الأساسي
+    const email = user.primaryEmailAddress?.emailAddress;
 
-  if (!adminUser) {
-    return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+    if (!email) {
+      return NextResponse.json({ error: 'Email not found' }, { status: 401 });
+    }
+
+    // تنفيذ العمليات المطلوبة باستخدام البريد الإلكتروني
+    // ...
+
+    return NextResponse.json({ message: 'Operation successful' });
+  } catch (error) {
+    return NextResponse.json({ error: 'Failed to fetch user data' }, { status: 500 });
   }
-
-  // إذا كان المستخدم موجودًا كـ admin، نفذ الدالة handler
-  return handler();
-}
+};
