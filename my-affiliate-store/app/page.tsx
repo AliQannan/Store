@@ -3,12 +3,13 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
-// Interface for API response
+// Interface for API response - corrected to match your Prisma schema
 interface ApiProduct {
-  id: number;
+  id: string; // Changed from number to string (cuid)
   name: string;
-  price: number;
-  images: string[]; // Array of image URLs
+  description: string;
+  price: number; // Decimal in Prisma becomes number in TypeScript
+  images: string[];
   category: string;
   stock: number;
   createdAt: string;
@@ -17,7 +18,7 @@ interface ApiProduct {
 
 // Transformed product interface for frontend
 interface Product {
-  id: number;
+  id: string; // Changed to match API
   name: string;
   name_ar: string;
   price: number;
@@ -53,12 +54,12 @@ export default function AliBabaAffiliatePage() {
           id: apiProduct.id,
           name: apiProduct.name,
           name_ar: apiProduct.name, // Using same name for both languages
-          price: apiProduct.price,
+          price: Number(apiProduct.price), // Ensure it's a number
           image: apiProduct.images && apiProduct.images.length > 0 
             ? apiProduct.images[0] 
             : 'https://placehold.co/300x200',
-          description: `${apiProduct.name} - ${apiProduct.category} (Stock: ${apiProduct.stock})`,
-          description_ar: `${apiProduct.name} - ${apiProduct.category} (المخزون: ${apiProduct.stock})`,
+          description: apiProduct.description || `${apiProduct.name} - ${apiProduct.category} (Stock: ${apiProduct.stock})`,
+          description_ar: apiProduct.description || `${apiProduct.name} - ${apiProduct.category} (المخزون: ${apiProduct.stock})`,
           affiliateLink: `https://www.alibaba.com/search?q=${encodeURIComponent(apiProduct.name)}`,
           clicks: 0 // Initialize with 0 clicks
         }));
@@ -96,7 +97,7 @@ export default function AliBabaAffiliatePage() {
           {currentLanguage === 'en' ? product.description : product.description_ar}
         </p>
         <div className="flex justify-between items-center">
-          <span className="text-primary font-bold">${product.price}</span>
+          <span className="text-primary font-bold">${product.price.toFixed(2)}</span>
           <a
             href={product.affiliateLink}
             target="_blank"
