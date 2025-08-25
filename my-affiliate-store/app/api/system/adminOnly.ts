@@ -14,21 +14,14 @@ export async function adminOnly(
   handler: () => Promise<NextResponse>
 ) {
   // الحصول على بيانات المستخدم من Clerk
-  const { userId } = getAuth(req);
-  if (!userId) {
+  const { userId, emailAddresses } = getAuth(req);
+
+  if (!userId || !emailAddresses || emailAddresses.length === 0) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  // جلب بيانات المستخدم من Clerk
-  const userEmail = getAuth(req).userId
-    ? await fetch(`https://api.clerk.com/v1/users/${userId}`, {
-        headers: { Authorization: `Bearer ${process.env.CLERK_API_KEY}` },
-      }).then(res => res.json()).then(data => data.email)
-    : null;
-
-  if (!userEmail) {
-    return NextResponse.json({ error: 'Email not found' }, { status: 401 });
-  }
+  // أخذ البريد الرئيسي للمستخدم
+  const userEmail = emailAddresses[0].emailAddress;
 
   // التحقق من وجود المستخدم في جدول Admin
   const adminUser = await prisma.adminUser.findUnique({
