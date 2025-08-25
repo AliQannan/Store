@@ -12,7 +12,7 @@ export async function adminOnly(req: NextRequest, handler: () => Promise<NextRes
   const userEmail = req.headers.get('x-user-email'); // أو استخدم session من getAuth
   if (!userEmail) return NextResponse.json({ error: 'Email not found' }, { status: 401 });
 
-  const adminUser = await prisma.admin_users.findUnique({
+  const adminUser = await prisma.AdminUser.findUnique({
     where: { email: userEmail },
   });
 
