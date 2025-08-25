@@ -3,6 +3,19 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
+// Interface for API response
+interface ApiProduct {
+  id: number;
+  name: string;
+  price: number;
+  images: string[]; // Array of image URLs
+  category: string;
+  stock: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// Transformed product interface for frontend
 interface Product {
   id: number;
   name: string;
@@ -20,86 +33,43 @@ export default function AliBabaAffiliatePage() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  // Sample products data (would come from Supabase in real app)
-  const sampleProducts: Product[] = [
-    {
-      id: 1,
-      name: "Premium Collagen Supplements",
-      name_ar: "مكملات الكولاجين الممتازة",
-      price: 49.99,
-      image: "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/63dd2dce-9ad7-4c20-9476-c69b87f8d1a9.png",
-      description: "Advanced collagen formula for skin health and joint support from Ali Baba suppliers",
-      description_ar: "تركيبة كولاجين متقدمة لصحة البشرة ودعم المفاصل من موردي علي بابا",
-      affiliateLink: "https://www.alibaba.com/product-detail/Premium-Collagen-Supplements_1234567890.html",
-      clicks: 142
-    },
-    {
-      id: 2,
-      name: "Organic Face Serum",
-      name_ar: "سيروم الوجه العضوي",
-      price: 29.99,
-      image: "https://placehold.co/300x200",
-      description: "Natural anti-aging serum with hyaluronic acid - Ali Baba verified supplier",
-      description_ar: "سيروم مضاد للشيخوخة طبيعي مع حمض الهيالورونيك - مورد موثوق من علي بابا",
-      affiliateLink: "https://www.alibaba.com/product-detail/Organic-Face-Serum_9876543210.html",
-      clicks: 89
-    },
-    {
-      id: 3,
-      name: "Yoga Mat Premium",
-      name_ar: "سجادة يوجا ممتازة",
-      price: 39.99,
-      image: "https://placehold.co/300x200",
-      description: "Eco-friendly yoga mat with non-slip surface from Ali Baba manufacturers",
-      description_ar: "سجادة يوجا صديقة للبيئة بسطح غير قابل للانزلاق من مصنعي علي بابا",
-      affiliateLink: "https://www.alibaba.com/product-detail/Yoga-Mat-Premium_5555555555.html",
-      clicks: 67
-    },
-    {
-      id: 4,
-      name: "Essential Oil Diffuser",
-      name_ar: "ناشر الزيوت العطرية",
-      price: 24.99,
-      image: "https://placehold.co/300x200",
-      description: "Ultrasonic aromatherapy diffuer with color changing lights - Ali Baba wholesale",
-      description_ar: "ناشر عطري بالموجات فوق الصوتية مع أضواء متغيرة الألوان - بالجملة من علي بابا",
-      affiliateLink: "https://www.alibaba.com/product-detail/Essential-Oil-Diffuser_4444444444.html",
-      clicks: 112
-    },
-    {
-      id: 5,
-      name: "Fitness Tracker Watch",
-      name_ar: "ساعة تتبع اللياقة البدنية",
-      price: 79.99,
-      image: "https://placehold.co/300x200",
-      description: "Smart watch with heart rate monitor and sleep tracking from Ali Baba",
-      description_ar: "ساعة ذكية مع مراقب معدل ضربات القلب وتتبع النوم من علي بابا",
-      affiliateLink: "https://www.alibaba.com/product-detail/Fitness-Tracker-Watch_3333333333.html",
-      clicks: 156
-    },
-    {
-      id: 6,
-      name: "Natural Shampoo & Conditioner",
-      name_ar: "شامبو وبلسم طبيعي",
-      price: 19.99,
-      image: "https://placehold.co/300x200",
-      description: "Sulfate-free hair care for all hair types - Ali Baba certified",
-      description_ar: "عناية بالشعر خالية من الكبريتات لجميع أنواع الشعر - معتمد من علي بابا",
-      affiliateLink: "https://www.alibaba.com/product-detail/Natural-Shampoo-Conditioner_2222222222.html",
-      clicks: 203
-    }
-  ];
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Simulate API call to fetch products
     const fetchProducts = async () => {
       setIsLoading(true);
-      // In real app, this would be an API call to Supabase
-      setTimeout(() => {
-        setProducts(sampleProducts);
+      setError(null);
+      try {
+        const response = await fetch('http://13.53.206.88:5000/api/products');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const apiProducts: ApiProduct[] = await response.json();
+        
+        // Transform API products to match our frontend interface
+        const transformedProducts: Product[] = apiProducts.map(apiProduct => ({
+          id: apiProduct.id,
+          name: apiProduct.name,
+          name_ar: apiProduct.name, // Using same name for both languages
+          price: apiProduct.price,
+          image: apiProduct.images && apiProduct.images.length > 0 
+            ? apiProduct.images[0] 
+            : 'https://placehold.co/300x200',
+          description: `${apiProduct.name} - ${apiProduct.category} (Stock: ${apiProduct.stock})`,
+          description_ar: `${apiProduct.name} - ${apiProduct.category} (المخزون: ${apiProduct.stock})`,
+          affiliateLink: `https://www.alibaba.com/search?q=${encodeURIComponent(apiProduct.name)}`,
+          clicks: 0 // Initialize with 0 clicks
+        }));
+        
+        setProducts(transformedProducts);
+      } catch (err) {
+        console.error('Failed to fetch products:', err);
+        setError('Failed to load products. Please try again later.');
+      } finally {
         setIsLoading(false);
-      }, 1000);
+      }
     };
 
     fetchProducts();
@@ -257,6 +227,14 @@ export default function AliBabaAffiliatePage() {
           {isLoading ? (
             <div className="flex justify-center items-center py-12">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            </div>
+          ) : error ? (
+            <div className="text-center py-12 text-red-500">
+              {error}
+            </div>
+          ) : products.length === 0 ? (
+            <div className="text-center py-12 text-gray-500">
+              {currentLanguage === 'en' ? 'No products available' : 'لا توجد منتجات متاحة'}
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
