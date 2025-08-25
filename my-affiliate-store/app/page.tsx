@@ -62,7 +62,7 @@ export default function AliBabaAffiliatePage() {
       name_ar: "ناشر الزيوت العطرية",
       price: 24.99,
       image: "https://placehold.co/300x200",
-      description: "Ultrasonic aromatherapy diffuser with color changing lights - Ali Baba wholesale",
+      description: "Ultrasonic aromatherapy diffuer with color changing lights - Ali Baba wholesale",
       description_ar: "ناشر عطري بالموجات فوق الصوتية مع أضواء متغيرة الألوان - بالجملة من علي بابا",
       affiliateLink: "https://www.alibaba.com/product-detail/Essential-Oil-Diffuser_4444444444.html",
       clicks: 112
@@ -107,11 +107,6 @@ export default function AliBabaAffiliatePage() {
 
   const toggleLanguage = () => {
     setCurrentLanguage(currentLanguage === 'en' ? 'ar' : 'en');
-  };
-
-  const handleProductSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert(currentLanguage === 'en' ? 'Product added to Ali Baba tracking!' : 'تمت إضافة المنتج لتتبع علي بابا!');
   };
 
   const ProductCard = ({ product }: { product: Product }) => (
@@ -239,7 +234,7 @@ export default function AliBabaAffiliatePage() {
                 className="rounded-lg shadow-xl"
               />
             </div>
-          </极速28玩法>
+          </div>
         </div>
       </section>
 
@@ -396,4 +391,3 @@ export default function AliBabaAffiliatePage() {
     </div>
   );
 }
-
