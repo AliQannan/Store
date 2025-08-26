@@ -77,7 +77,8 @@ export default function AliBabaAffiliatePage() {
             : 'https://placehold.co/300x200',
           description: apiProduct.description || `${apiProduct.name} - ${apiProduct.category} (Stock: ${apiProduct.stock})`,
           description_ar: apiProduct.description || `${apiProduct.name} - ${apiProduct.category} (المخزون: ${apiProduct.stock})`,
-          affiliateLink: apiProduct.description.startsWith("http") 
+          affiliateLink: "https://offer.alibaba.com/cps/bn67ksob?bm=cps&src=saf&productId=1600151826985"
+ 
             ? apiProduct.description
             : `https://www.alibaba.com/search?q=${encodeURIComponent(apiProduct.name)}`,
           clicks: 0,
