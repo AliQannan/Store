@@ -3,12 +3,12 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
-// Interface for API response - corrected to match your Prisma schema
+// Interface for API response
 interface ApiProduct {
-  id: string; // Changed from number to string (cuid)
+  id: string;
   name: string;
   description: string;
-  price: number; // Decimal in Prisma becomes number in TypeScript
+  price: string; // <-- API returns price as string
   images: string[];
   category: string;
   stock: number;
@@ -18,7 +18,7 @@ interface ApiProduct {
 
 // Transformed product interface for frontend
 interface Product {
-  id: string; // Changed to match API
+  id: string;
   name: string;
   name_ar: string;
   price: number;
@@ -41,7 +41,7 @@ export default function AliBabaAffiliatePage() {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await fetch('http://13.53.206.88:5000/api/products');
+        const response = await fetch('https://storeapi-flame.vercel.app');
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -52,16 +52,18 @@ export default function AliBabaAffiliatePage() {
         // Transform API products to match our frontend interface
         const transformedProducts: Product[] = apiProducts.map(apiProduct => ({
           id: apiProduct.id,
-          name: apiProduct.name,
-          name_ar: apiProduct.name, // Using same name for both languages
-          price: Number(apiProduct.price), // Ensure it's a number
+          name: apiProduct.name.trim(),
+          name_ar: apiProduct.name.trim(), 
+          price: Number(apiProduct.price), // Convert string to number
           image: apiProduct.images && apiProduct.images.length > 0 
             ? apiProduct.images[0] 
             : 'https://placehold.co/300x200',
           description: apiProduct.description || `${apiProduct.name} - ${apiProduct.category} (Stock: ${apiProduct.stock})`,
           description_ar: apiProduct.description || `${apiProduct.name} - ${apiProduct.category} (المخزون: ${apiProduct.stock})`,
-          affiliateLink: `https://www.alibaba.com/search?q=${encodeURIComponent(apiProduct.name)}`,
-          clicks: 0 // Initialize with 0 clicks
+          affiliateLink: apiProduct.description.startsWith("http") 
+            ? apiProduct.description // لو هو لينك مباشر للمنتج
+            : `https://www.alibaba.com/search?q=${encodeURIComponent(apiProduct.name)}`,
+          clicks: 0 
         }));
         
         setProducts(transformedProducts);
@@ -113,102 +115,8 @@ export default function AliBabaAffiliatePage() {
 
   return (
     <div className={`min-h-screen bg-gray-50 ${currentLanguage === 'ar' ? 'rtl' : 'ltr'}`}>
-      {/* Language Toggle */}
-      <div className="fixed top-4 right-4 z-50">
-        <button
-          onClick={toggleLanguage}
-          className="bg-primary text-white px-4 py-2 rounded-full shadow-md transition-all hover:bg-indigo-700"
-        >
-          {currentLanguage === 'en' ? 'العربية' : 'English'}
-        </button>
-      </div>
-
-      {/* Navigation */}
-      <nav className="bg-white shadow-lg">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <Image
-                src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/89ce0e46-d0b9-49e9-b41b-7e86924737b4.png"
-                alt="HealthBeauty Pro logo with green leaf and shopping cart icon"
-                width={40}
-                height={40}
-                className="h-8 w-8 mr-2"
-              />
-              <span className="text-xl font-bold text-primary">
-                {currentLanguage === 'en' ? 'HealthBeauty Pro' : 'صحة وجمال برو'}
-              </span>
-            </div>
-            
-            <div className="hidden md:flex space-x-8">
-              <a href="#home" className="text-gray-700 hover:text-primary transition">
-                {currentLanguage === 'en' ? 'Home' : 'الرئيسية'}
-              </a>
-              <a href="#products" className="text-gray-700 hover:text-primary transition">
-                {currentLanguage === 'en' ? 'Products' : 'المنتجات'}
-              </a>
-              <a href="#dashboard" className="text-gray-700 hover:text-primary transition">
-                {currentLanguage === 'en' ? 'Dashboard' : 'لوحة التحكم'}
-              </a>
-              <a href="#about" className="text-gray-700 hover:text-primary transition">
-                {currentLanguage === 'en' ? 'About' : 'عنّا'}
-              </a>
-            </div>
-            
-            <div className="flex items-center space-x-4">
-              <button
-                onClick={() => setShowLoginModal(true)}
-                className="bg-primary text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition"
-              >
-                {currentLanguage === 'en' ? 'Sign In' : 'تسجيل الدخول'}
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <section id="home" className="relative bg-gradient-to-r from-blue-50 to-green-50 py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center">
-            <div className="md:w-1/2 mb-8 md:mb-0">
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-                {currentLanguage === 'en' 
-                  ? 'Discover Premium Health & Beauty Products on Ali Baba' 
-                  : 'اكتشف منتجات الصحة والجمال المميزة على علي بابا'
-                }
-              </h1>
-              
-              <p className="text-lg text-gray-600 mb-6">
-                {currentLanguage === 'en'
-                  ? 'Earn commissions by promoting top-quality health and beauty products from Ali Baba global marketplace'
-                  : 'اربح عمولات عن طريق الترويج لمنتجات الصحة والجمال عالية الجودة من السوق العالمية علي بابا'
-                }
-              </p>
-              
-              <div className="flex space-x-4">
-                <button className="bg-primary text-white px-6 py-3 rounded-md hover:bg-indigo-700 transition">
-                  {currentLanguage === 'en' ? 'Start Earning' : 'ابدأ الربح'}
-                </button>
-                <button className="border border-primary text-primary px-6 py-3 rounded-md hover:bg-primary hover:text-white transition">
-                  {currentLanguage === 'en' ? 'Learn More' : 'اعرف المزيد'}
-                </button>
-              </div>
-            </div>
-            
-            <div className="md:w-1/2">
-              <Image
-                src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d35507a1-b3e3-4afe-9f26-59ce0d38f0c0.png"
-                alt="Modern health and beauty products from Ali Baba featuring skincare, supplements, and wellness items"
-                width={600}
-                height={400}
-                className="rounded-lg shadow-xl"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
+      {/* باقي الكود تبع الصفحة زي ما هو */}
+      
       {/* Products Section */}
       <section id="products" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4">
@@ -216,13 +124,6 @@ export default function AliBabaAffiliatePage() {
             <h2 className="text-3xl font-bold text-gray-800 mb-4">
               {currentLanguage === 'en' ? 'Ali Baba Featured Products' : 'منتجات علي بابا المميزة'}
             </h2>
-            
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              {currentLanguage === 'en'
-                ? 'Discover our curated selection of health and beauty products from verified Ali Baba suppliers'
-                : 'اكتشف مجموعتنا المختارة من منتجات الصحة والجمال من الموردين الموثوقين على علي بابا'
-              }
-            </p>
           </div>
 
           {isLoading ? (
@@ -246,127 +147,6 @@ export default function AliBabaAffiliatePage() {
           )}
         </div>
       </section>
-
-      {/* API Integration Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">
-              {currentLanguage === 'en' ? 'Ali Baba API Integration' : 'تكامل واجهة برمجة تطبيقات علي بابا'}
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              {currentLanguage === 'en'
-                ? 'Seamless integration with Ali Baba API for real-time product data and affiliate tracking'
-                : 'تكامل سلس مع واجهة برمجة تطبيقات علي بابا لبيانات المنتج في الوقت الفعلي وتتبع العمولات'
-              }
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-md text-center">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">📊</span>
-              </div>
-              <h3 className="font-semibold text-lg mb-2">
-                {currentLanguage === 'en' ? 'Real-time Data' : 'بيانات فورية'}
-              </h3>
-              <p className="text-gray-600">
-                {currentLanguage === 'en'
-                  ? 'Get live product information and pricing from Ali Baba'
-                  : 'احصل على معلومات المنتج والأسعار المباشرة من علي بابا'
-                }
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-lg shadow-md text-center">
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">💰</span>
-              </div>
-              <h3 className="font-semibold text-lg mb-2">
-                {currentLanguage === 'en' ? 'Commission Tracking' : 'تتبع العمولات'}
-              </h3>
-              <p className="text-gray-600">
-                {currentLanguage === 'en'
-                  ? 'Track your affiliate commissions in real-time'
-                  : 'تتبع عمولات التسويق بالعمولة في الوقت الفعلي'
-                }
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-lg shadow-md text-center">
-              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🔄</span>
-              </div>
-              <h3 className="font-semibold text-lg mb-2">
-                {currentLanguage === 'en' ? 'Auto Sync' : 'مزامنة تلقائية'}
-              </h3>
-              <p className="text-gray-600">
-                {currentLanguage === 'en'
-                  ? 'Automatically sync product inventory and updates'
-                  : 'مزامنة مخزون المنتجات والتحديثات تلقائيًا'
-                }
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Login Modal */}
-      {showLoginModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-semibold">
-                {currentLanguage === 'en' ? 'Sign In' : 'تسجيل الدخول'}
-              </h3>
-              <button
-                onClick={() => setShowLoginModal(false)}
-                className="text-gray-500 hover:text-gray-700"
-              >
-                ×
-              </button>
-            </div>
-            
-            <form className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {currentLanguage === 'en' ? 'Email' : 'البريد الإلكتروني'}
-                </label>
-                <input
-                  type="email"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                  placeholder={currentLanguage === 'en' ? 'your@email.com' : 'بريدك@الإلكتروني.com'}
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {currentLanguage === 'en' ? 'Password' : 'كلمة المرور'}
-                </label>
-                <input
-                  type="password"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                  placeholder="••••••••"
-                />
-              </div>
-              
-              <button
-                type="submit"
-                className="w-full bg-primary text-white py-2 rounded-md hover:bg-indigo-700 transition"
-              >
-                {currentLanguage === 'en' ? 'Sign In' : 'تسجيل الدخول'}
-              </button>
-            </form>
-            
-            <p className="text-center mt-4 text-sm text-gray-600">
-              {currentLanguage === 'en' ? "Don't have an account? " : "ليس لديك حساب؟ "}
-              <a href="#" className="text-primary hover:underline">
-                {currentLanguage === 'en' ? 'Sign up' : 'اشترك الآن'}
-              </a>
-            </p>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
