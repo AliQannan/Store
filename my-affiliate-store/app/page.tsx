@@ -11,9 +11,8 @@ interface ApiProduct {
   price: string;
   images: string[];
   category: string;
-  AffiliateLink: string | null; // Add this field
-
   stock: number;
+  AffiliateLink: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -79,16 +78,13 @@ export default function AliBabaAffiliatePage() {
             : 'https://placehold.co/300x200',
           description: apiProduct.description || `${apiProduct.name} - ${apiProduct.category} (Stock: ${apiProduct.stock})`,
           description_ar: apiProduct.description || `${apiProduct.name} - ${apiProduct.category} (المخزون: ${apiProduct.stock})`,
-      
- 
-            ? apiProduct.description
+          affiliateLink: apiProduct.AffiliateLink 
+            ? apiProduct.AffiliateLink
             : `https://www.alibaba.com/search?q=${encodeURIComponent(apiProduct.name)}`,
           clicks: 0,
           rating: Math.floor(Math.random() * 3) + 3, // Random rating between 3-5
           reviews: Math.floor(Math.random() * 100) + 10, // Random reviews between 10-110
-          category: ['fitness', 'supplements', 'home', 'personal', 'mental'][Math.floor(Math.random() * 5)] 
-           ,affiliateLink: apiProduct.AffiliateLink
-          // Random category
+          category: ['fitness', 'supplements', 'home', 'personal', 'mental'][Math.floor(Math.random() * 5)] // Random category
         }));
         
         setProducts(transformedProducts);
@@ -113,7 +109,6 @@ export default function AliBabaAffiliatePage() {
       result = result.filter(product => 
         product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.description.toLowerCase().includes(searchQuery.toLowerCase())
-                             
       );
     }
     
