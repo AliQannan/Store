@@ -227,9 +227,7 @@ export default function AliBabaAffiliatePage() {
                 {currentLanguage === 'en' ? 'العربية' : 'English'}
               </button>
               
-              <button className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
-                {currentLanguage === 'en' ? 'Sign In' : 'تسجيل الدخول'}
-              </button>
+             
             </div>
           </div>
         </div>
