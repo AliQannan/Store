@@ -59,7 +59,7 @@ export default function AliBabaAffiliatePage() {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await fetch('https://storeapi-flame.vercel.app/api/products');
+        const response = await fetch('https://storeapi-mu.vercel.app/api/products');
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
