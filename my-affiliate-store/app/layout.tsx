@@ -39,8 +39,7 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300`}
         >
-          <p>
-          Impact-Site-Verification: a9f6801d-ba01-47fc-953e-50f9c2f7cb92</p>
+        
           {/* Navbar */}
           <header className="flex justify-between items-center px-8 h-16 border-b border-gray-200 bg-white dark:bg-gray-950 dark:border-gray-800 shadow-sm transition-colors duration-300">
             {/* Logo - تم التحديث لاستخدام الشعار الحقيقي */}
