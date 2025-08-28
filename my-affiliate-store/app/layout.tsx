@@ -26,7 +26,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "GST Health - Premium Wellness Products",
   description: "Discover the best health and wellness products for your lifestyle",
-  icons: "/public/smart.png"
+  icons: { icon:
+    "/public/smart.png"
+         
+         
+         }
 }
 
 export default function RootLayout({
