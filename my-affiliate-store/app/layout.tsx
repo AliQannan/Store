@@ -26,11 +26,6 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "GST Health - Premium Wellness Products",
   description: "Discover the best health and wellness products for your lifestyle",
-  icons: { icon:
-    "/public/smart.png"
-         
-         
-         }
 }
 
 export default function RootLayout({
@@ -44,20 +39,23 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300`}
         >
-        
           {/* Navbar */}
-          <header className="flex justify-between items-center px-8 h-16 border-b border-gray-200 bg-white dark:bg-gray-950 dark:border-gray-800 shadow-sm transition-colors duration-300">
-            {/* Logo - تم التحديث لاستخدام الشعار الحقيقي */}
-            <div className="flex items-center gap-2">
+          <header className="flex justify-between items-center px-8 h-20 border-b border-gray-200 bg-white dark:bg-gray-950 dark:border-gray-800 shadow-sm transition-colors duration-300">
+            {/* Logo - تم تكبيره وتحسينه */}
+            <div className="flex items-center gap-3">
               <div className="flex items-center justify-center">
                 <Image 
-                  src="smart.png" 
+                  src="/smart.png" 
                   alt="GST Health Logo" 
-                  width={120} 
-                  height={40} 
-                  className="h-10 w-auto"
+                  width={160} 
+                  height={50} 
+                  className="h-12 w-auto object-contain"
+                  priority
                 />
               </div>
+              <span className="text-xl font-bold text-green-700 hidden md:block">
+                GST Health
+              </span>
             </div>
 
             {/* Auth buttons */}
