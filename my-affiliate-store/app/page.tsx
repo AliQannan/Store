@@ -35,7 +35,6 @@ interface Product {
 
 export default function AliBabaAffiliatePage() {
   const [currentLanguage, setCurrentLanguage] = useState<'en' | 'ar'>('en');
-  const [showLoginModal, setShowLoginModal] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -209,13 +208,15 @@ export default function AliBabaAffiliatePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center">
-              <div className="bg-green-600 text-white p-2 rounded-lg mr-3">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                </svg>
-              </div>
+              <Image 
+                src="/smart.png" 
+                alt="GST Health Logo" 
+                width={120} 
+                height={40} 
+                className="h-10 w-auto mr-3"
+              />
               <h1 className="text-xl font-bold text-gray-800">
-                {currentLanguage === 'en' ? 'Wellness Marketplace' : 'سوق العافية'}
+                {currentLanguage === 'en' ? 'GST Health Marketplace' : 'سوق GST للصحة'}
               </h1>
             </div>
             
@@ -226,8 +227,6 @@ export default function AliBabaAffiliatePage() {
               >
                 {currentLanguage === 'en' ? 'العربية' : 'English'}
               </button>
-              
-             
             </div>
           </div>
         </div>
@@ -243,7 +242,7 @@ export default function AliBabaAffiliatePage() {
             <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
               {currentLanguage === 'en' 
                 ? 'Discover the best products for your wellbeing journey with trusted quality and affordable prices'
-                : 'اكتشف أفضل المنتجات لرحلتك towards العافية بجودة موثوقة وأسعار معقولة'}
+                : 'اكتشف أفضل المنتجات لرحلتك نحو العافية بجودة موثوقة وأسعار معقولة'}
             </p>
             
             <div className="max-w-2xl mx-auto relative">
@@ -346,39 +345,57 @@ export default function AliBabaAffiliatePage() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* About Company Section - Replaced Testimonials */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">
-            {currentLanguage === 'en' ? 'What Our Customers Say' : 'ماذا يقول عملاؤنا'}
+            {currentLanguage === 'en' ? 'About GST Health' : 'عن شركة GST للصحة'}
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((item) => (
-              <div key={item} className="bg-green-50 p-6 rounded-xl">
-                <div className="flex items-center mb-4">
-                  {renderStars(5)}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h3 className="text-2xl font-semibold text-green-700 mb-4">
+                {currentLanguage === 'en' ? 'Your Trusted Health Partner' : 'شريكك الموثوق في الصحة'}
+              </h3>
+              <p className="text-gray-700 mb-6">
+                {currentLanguage === 'en' 
+                  ? "At GST Health, we carefully select and review the best health and wellness products to ensure you get only the highest quality items for your wellbeing. Our team of experts tests each product to guarantee it meets our strict standards."
+                  : "في GST للصحة، نقوم باختيار ومراجعة أفضل منتجات الصحة والعناية بعناية لضمان حصولك على أعلى مستويات الجودة لرفاهيتك. يقوم فريقنا من الخبراء باختبار كل منتج لضمان استيفائه لمعاييرنا الصارمة."}
+              </p>
+              <p className="text-gray-700 mb-6">
+                {currentLanguage === 'en' 
+                  ? "We believe that everyone deserves access to quality health products that can improve their quality of life. That's why we've made it our mission to bring you the best products at affordable prices."
+                  : "نحن نؤمن بأن الجميع يستحقون الوصول إلى منتجات صحية عالية الجودة يمكن أن تحسن جودة حياتهم. لهذا جعلنا مهمتنا هي تقديم أفضل المنتجات بأسعار معقولة."}
+              </p>
+              <div className="flex gap-4">
+                <div className="bg-green-100 p-4 rounded-lg text-center">
+                  <span className="block text-2xl font-bold text-green-700">100+</span>
+                  <span className="text-green-600">{currentLanguage === 'en' ? 'Products' : 'منتج'}</span>
                 </div>
-                <p className="text-gray-700 mb-4">
-                  {currentLanguage === 'en' 
-                    ? "I've been using their fitness equipment for months now and the quality is exceptional. Highly recommend for anyone looking to upgrade their home gym!"
-                    : "أستخدم معدات اللياقة البدنية الخاصة بهم منذ شهور الآن والجودة استثنائية. أوصي بشدة لأي شخص يتطلع إلى ترقية صالة الألعاب الرياضية في المنزل!"}
-                </p>
-                <div className="flex items-center">
-                  <div className="bg-green-100 text-green-800 rounded-full h-10 w-10 flex items-center justify-center font-bold mr-3">
-                    {currentLanguage === 'en' ? 'JD' : 'م ح'}
-                  </div>
-                  <div>
-                    <p className="font-medium text-gray-800">
-                      {currentLanguage === 'en' ? 'John Doe' : 'محمد حسين'}
-                    </p>
-                    <p className="text-sm text-gray-600">
-                      {currentLanguage === 'en' ? 'Verified Customer' : 'عميل موثوق'}
-                    </p>
-                  </div>
+                <div className="bg-green-100 p-4 rounded-lg text-center">
+                  <span className="block text-2xl font-bold text-green-700">5K+</span>
+                  <span className="text-green-600">{currentLanguage === 'en' ? 'Happy Customers' : 'عميل سعيد'}</span>
+                </div>
+                <div className="bg-green-100 p-4 rounded-lg text-center">
+                  <span className="block text-2xl font-bold text-green-700">10+</span>
+                  <span className="text-green-600">{currentLanguage === 'en' ? 'Years' : 'سنوات'}</span>
                 </div>
               </div>
-            ))}
+            </div>
+            
+            <div className="relative">
+              <Image
+                src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                alt="GST Health Team"
+                width={600}
+                height={400}
+                className="rounded-xl shadow-lg"
+              />
+              <div className="absolute -bottom-4 -left-4 bg-green-600 text-white p-4 rounded-lg shadow-lg">
+                <span className="block text-xl font-bold">{currentLanguage === 'en' ? 'Quality Guaranteed' : 'جودة مضمونة'}</span>
+                <span className="text-sm">{currentLanguage === 'en' ? 'Since 2013' : 'منذ 2013'}</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -388,9 +405,13 @@ export default function AliBabaAffiliatePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-              <h3 className="text-lg font-semibold mb-4">
-                {currentLanguage === 'en' ? 'Wellness Marketplace' : 'سوق العافية'}
-              </h3>
+              <Image 
+                src="/smart.png" 
+                alt="GST Health Logo" 
+                width={120} 
+                height={40} 
+                className="h-10 w-auto mb-4"
+              />
               <p className="text-gray-400">
                 {currentLanguage === 'en' 
                   ? 'Your trusted source for quality health and wellness products at affordable prices.'
@@ -448,7 +469,7 @@ export default function AliBabaAffiliatePage() {
           </div>
           
           <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-            <p>© 2023 {currentLanguage === 'en' ? 'Wellness Marketplace. All rights reserved.' : 'سوق العافية. جميع الحقوق محفوظة.'}</p>
+            <p>© 2023 {currentLanguage === 'en' ? 'GST Health. All rights reserved.' : 'GST للصحة. جميع الحقوق محفوظة.'}</p>
           </div>
         </div>
       </footer>
