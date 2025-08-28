@@ -45,7 +45,7 @@ export default function RootLayout({
             <div className="flex items-center gap-2">
               <div className="flex items-center justify-center">
                 <Image 
-                  src="/smart.png" 
+                  src="smart.png" 
                   alt="GST Health Logo" 
                   width={120} 
                   height={40} 
