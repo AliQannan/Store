@@ -40,27 +40,27 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300`}
         >
-          {/* Enhanced Navbar with Mobile Support */}
-          <header className="sticky top-0 z-50 flex justify-between items-center px-4 sm:px-6 lg:px-8 h-16 sm:h-20 border-b border-gray-200 bg-white dark:bg-gray-950 dark:border-gray-800 shadow-sm transition-colors duration-300 backdrop-blur-sm bg-white/95 dark:bg-gray-950/95">
+          {/* Enhanced Navbar */}
+          <header className="sticky top-0 z-50 flex justify-between items-center px-6 lg:px-8 h-20 border-b border-gray-200 bg-white dark:bg-gray-950 dark:border-gray-800 shadow-sm transition-colors duration-300 backdrop-blur-sm bg-white/95">
             {/* Logo */}
-            <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-3">
               <div className="flex items-center justify-center">
                 <Image 
                   src="/smart.png" 
                   alt="GST Health Logo" 
-                  width={140} 
-                  height={40} 
-                  className="h-8 sm:h-10 w-auto object-contain"
+                  width={160} 
+                  height={50} 
+                  className="h-12 w-auto object-contain"
                   priority
                 />
               </div>
-              <span className="text-lg sm:text-xl font-bold text-green-700 hidden sm:block">
+              <span className="text-xl font-bold text-green-700 hidden md:block">
                 GST Health
               </span>
             </div>
 
-            {/* Desktop Navigation Links */}
-            <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+            {/* Navigation Links */}
+            <nav className="hidden md:flex items-center gap-8 mr-8">
               <a href="#products" className="text-gray-700 dark:text-gray-300 hover:text-green-600 transition-colors font-medium">
                 Products
               </a>
@@ -75,85 +75,25 @@ export default function RootLayout({
               </a>
             </nav>
 
-            {/* Auth buttons and User Icon */}
-            <div className="flex gap-2 sm:gap-3 items-center">
+            {/* Auth buttons */}
+            <div className="flex gap-3 items-center">
               <SignedOut>
                 <SignInButton>
-                  <button className="border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition rounded-full font-medium text-xs sm:text-sm h-8 sm:h-10 px-3 sm:px-5 cursor-pointer">
+                  <button className="border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition rounded-full font-medium text-sm sm:text-base h-10 sm:h-11 px-5 cursor-pointer">
                     Sign In
                   </button>
                 </SignInButton>
                 <SignUpButton>
-                  <button className="bg-green-600 hover:bg-green-700 text-white rounded-full font-medium text-xs sm:text-sm h-8 sm:h-10 px-3 sm:px-5 cursor-pointer">
+                  <button className="bg-green-600 hover:bg-green-700 text-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-11 px-5 cursor-pointer">
                     Sign Up
                   </button>
                 </SignUpButton>
               </SignedOut>
               <SignedIn>
-                <div className="flex items-center gap-2 sm:gap-3">
-                  <UserButton 
-                    appearance={{
-                      elements: {
-                        avatarBox: "h-8 w-8 sm:h-10 sm:w-10",
-                        userButtonPopoverCard: "dark:bg-gray-900 dark:text-white",
-                        userButtonPopoverActionButton: "dark:hover:bg-gray-800"
-                      }
-                    }}
-                  />
-                </div>
+                <UserButton />
               </SignedIn>
             </div>
-
-            {/* Mobile Menu Button */}
-            <div className="md:hidden ml-2">
-              <button 
-                className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-green-600 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none"
-                aria-label="Open mobile menu"
-                onClick={() => {
-                  const mobileMenu = document.getElementById('mobile-menu');
-                  if (mobileMenu) {
-                    mobileMenu.classList.toggle('hidden');
-                  }
-                }}
-              >
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              </button>
-            </div>
           </header>
-
-          {/* Mobile Menu */}
-          <div id="mobile-menu" className="hidden md:hidden bg-white dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800 py-4 px-6">
-            <nav className="flex flex-col space-y-4">
-              <a href="#products" className="text-gray-700 dark:text-gray-300 hover:text-green-600 transition-colors font-medium py-2">
-                Products
-              </a>
-              <a href="#about" className="text-gray-700 dark:text-gray-300 hover:text-green-600 transition-colors font-medium py-2">
-                About
-              </a>
-              <a href="#reviews" className="text-gray-700 dark:text-gray-300 hover:text-green-600 transition-colors font-medium py-2">
-                Reviews
-              </a>
-              <a href="#contact" className="text-gray-700 dark:text-gray-300 hover:text-green-600 transition-colors font-medium py-2">
-                Contact
-              </a>
-              <SignedOut>
-                <div className="flex flex-col space-y-3 pt-4 border-t border-gray-100 dark:border-gray-800">
-                  <SignInButton>
-                    <button className="w-full text-left border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition rounded-lg font-medium py-2 px-4 cursor-pointer">
-                      Sign In
-                    </button>
-                  </SignInButton>
-                  <SignUpButton>
-                    <button className="w-full text-left bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium py-2 px-4 cursor-pointer">
-                      Sign Up
-                    </button>
-                  </SignUpButton>
-                </div>
-              </SignedOut>
-            </nav>
-          </div>
 
           {/* Page content */}
           <main>{children}</main>
@@ -213,4 +153,4 @@ export default function RootLayout({
       </html>
     </ClerkProvider>
   )
-}
+} 
