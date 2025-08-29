@@ -243,6 +243,91 @@ export default function PremiumHealthMarketplace() {
           </div>
         </div>
       </section>
+       <section className="py-12 bg-white border-t border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-2xl font-light text-black mb-8 text-center tracking-tight">
+            {currentLanguage === 'en' ? 'Product Categories' : 'فئات المنتجات'}
+          </h2>
+          
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            {categories.map(category => (
+              <button
+                key={category.id}
+                onClick={() => setSelectedCategory(category.id)}
+                className={`px-5 py-3 text-sm uppercase tracking-wide ${selectedCategory === category.id 
+                  ? 'bg-black text-white border border-black' 
+                  : 'bg-white text-gray-600 border border-gray-300 hover:border-black'}`}
+              >
+                {category.name[currentLanguage]}
+              </button>
+            ))}
+          </div>
+          
+          <div className="flex justify-between items-center">
+            <p className="text-gray-600 text-sm">
+              {currentLanguage === 'en' 
+                ? `Showing ${filteredProducts.length} products` 
+                : `عرض ${filteredProducts.length} منتجات`}
+            </p>
+            
+            <div className="flex items-center">
+              <label className="mr-3 text-gray-600 text-sm">
+                {currentLanguage === 'en' ? 'Sort by:' : 'ترتيب حسب:'}
+              </label>
+              <select 
+                className="border border-gray-300 px-4 py-2 focus:outline-none focus:ring-1 focus:ring-black bg-white text-gray-900"
+                value={sortOption}
+                onChange={(e) => setSortOption(e.target.value)}
+              >
+                <option value="featured">{currentLanguage === 'en' ? 'Featured' : 'مميز'}</option>
+                <option value="price-low">{currentLanguage === 'en' ? 'Price: Low to High' : 'السعر: من الأقل للأعلى'}</option>
+                <option value="price-high">{currentLanguage === 'en' ? 'Price: High to Low' : 'السعر: من الأعلى للأقل'}</option>
+                <option value="rating">{currentLanguage === 'en' ? 'Top Rated' : 'الأعلى تقييماً'}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Products Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          {isLoading ? (
+            <div className="flex justify-center items-center py-20">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
+            </div>
+          ) : error ? (
+            <div className="text-center py-20">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-gray-400 mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <p className="text-gray-600 text-lg mb-6">{error}</p>
+              <button 
+                onClick={() => window.location.reload()}
+                className="bg-black text-white px-6 py-3 text-sm uppercase tracking-wide hover:bg-gray-800 transition-colors"
+              >
+                {currentLanguage === 'en' ? 'Try Again' : 'حاول مرة أخرى'}
+              </button>
+            </div>
+          ) : filteredProducts.length === 0 ? (
+            <div className="text-center py-20">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-gray-400 mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <p className="text-gray-600 text-lg">
+                {currentLanguage === 'en' ? 'No products found. Try a different search.' : 'لم يتم العثور على منتجات. حاول البحث باستخدام كلمات أخرى.'}
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              {filteredProducts.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
 
       {/* Company Introduction Section */}
       <section className="py-20 bg-white border-t border-b border-gray-200">
@@ -356,91 +441,7 @@ export default function PremiumHealthMarketplace() {
       </section>
 
       {/* Category Filter */}
-      <section className="py-12 bg-white border-t border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-2xl font-light text-black mb-8 text-center tracking-tight">
-            {currentLanguage === 'en' ? 'Product Categories' : 'فئات المنتجات'}
-          </h2>
-          
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {categories.map(category => (
-              <button
-                key={category.id}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`px-5 py-3 text-sm uppercase tracking-wide ${selectedCategory === category.id 
-                  ? 'bg-black text-white border border-black' 
-                  : 'bg-white text-gray-600 border border-gray-300 hover:border-black'}`}
-              >
-                {category.name[currentLanguage]}
-              </button>
-            ))}
-          </div>
-          
-          <div className="flex justify-between items-center">
-            <p className="text-gray-600 text-sm">
-              {currentLanguage === 'en' 
-                ? `Showing ${filteredProducts.length} products` 
-                : `عرض ${filteredProducts.length} منتجات`}
-            </p>
-            
-            <div className="flex items-center">
-              <label className="mr-3 text-gray-600 text-sm">
-                {currentLanguage === 'en' ? 'Sort by:' : 'ترتيب حسب:'}
-              </label>
-              <select 
-                className="border border-gray-300 px-4 py-2 focus:outline-none focus:ring-1 focus:ring-black bg-white text-gray-900"
-                value={sortOption}
-                onChange={(e) => setSortOption(e.target.value)}
-              >
-                <option value="featured">{currentLanguage === 'en' ? 'Featured' : 'مميز'}</option>
-                <option value="price-low">{currentLanguage === 'en' ? 'Price: Low to High' : 'السعر: من الأقل للأعلى'}</option>
-                <option value="price-high">{currentLanguage === 'en' ? 'Price: High to Low' : 'السعر: من الأعلى للأقل'}</option>
-                <option value="rating">{currentLanguage === 'en' ? 'Top Rated' : 'الأعلى تقييماً'}</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Products Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          {isLoading ? (
-            <div className="flex justify-center items-center py-20">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
-            </div>
-          ) : error ? (
-            <div className="text-center py-20">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-gray-400 mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <p className="text-gray-600 text-lg mb-6">{error}</p>
-              <button 
-                onClick={() => window.location.reload()}
-                className="bg-black text-white px-6 py-3 text-sm uppercase tracking-wide hover:bg-gray-800 transition-colors"
-              >
-                {currentLanguage === 'en' ? 'Try Again' : 'حاول مرة أخرى'}
-              </button>
-            </div>
-          ) : filteredProducts.length === 0 ? (
-            <div className="text-center py-20">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-gray-400 mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <p className="text-gray-600 text-lg">
-                {currentLanguage === 'en' ? 'No products found. Try a different search.' : 'لم يتم العثور على منتجات. حاول البحث باستخدام كلمات أخرى.'}
-              </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              {filteredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-
+     
       {/* Data Analysis Section */}
       <section className="py-20 bg-black text-white">
         <div className="max-w-7xl mx-auto px-6">
