@@ -214,35 +214,35 @@ export default function PremiumHealthMarketplace() {
       </div>
 
       {/* Hero Section - Apple Style */}
-      <section className="pt-32 pb-24 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h1 className="text-5xl font-light text-black mb-6 tracking-tight">
-              {currentLanguage === 'en' ? 'Premium Health & Wellness' : 'الصحة والعافية المميزة'}
-            </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
-              {currentLanguage === 'en' 
-                ? 'Expertly curated products for optimal wellbeing. Scientifically reviewed and analyzed for your health needs.'
-                : 'منتجات مختارة بعناية لرفاهيتك المثلى. تمت مراجعتها وتحليلها علميًا لتلبية احتياجاتك الصحية.'}
-            </p>
-            
-            <div className="max-w-2xl mx-auto relative">
-              <input
-                type="text"
-                placeholder={currentLanguage === 'en' ? 'Search health products...' : 'ابحث عن المنتجات الصحية...'}
-                className="w-full px-6 py-4 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-black bg-white text-gray-900 placeholder-gray-500"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <button className="absolute right-0 top-0 bg-black text-white p-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+     <section className="pt-16 pb-12 bg-gray-50 md:pt-20 md:pb-16">
+  <div className="max-w-3xl mx-auto px-4 sm:px-6">
+    <div className="text-center mb-10 md:mb-12">
+      <h1 className="text-3xl md:text-4xl font-light text-black mb-4 tracking-tight">
+        {currentLanguage === 'en' ? 'Premium Health & Wellness' : 'الصحة والعافية المميزة'}
+      </h1>
+      <p className="text-lg text-gray-600 mx-auto mb-8 leading-relaxed md:max-w-2xl">
+        {currentLanguage === 'en' 
+          ? 'Expertly curated products for optimal wellbeing. Scientifically reviewed and analyzed for your health needs.'
+          : 'منتجات مختارة بعناية لرفاهيتك المثلى. تمت مراجعتها وتحليلها علميًا لتلبية احتياجاتك الصحية.'}
+      </p>
+      
+      <div className="max-w-xl mx-auto relative">
+        <input
+          type="text"
+          placeholder={currentLanguage === 'en' ? 'Search health products...' : 'ابحث عن المنتجات الصحية...'}
+          className="w-full px-5 py-3 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-black bg-white text-gray-900 placeholder-gray-500 text-sm md:text-base"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <button className="absolute right-0 top-0 bg-black text-white h-full px-4 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
        <section className="py-12 bg-white border-t border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-2xl font-light text-black mb-8 text-center tracking-tight">
