@@ -204,16 +204,7 @@ export default function PremiumHealthMarketplace() {
   return (
     <div className={`min-h-screen bg-white ${currentLanguage === 'ar' ? 'rtl' : 'ltr'}`}>
       {/* Minimal Language Toggle */}
-      <div className="fixed top-6 right-6 z-50">
-       
-<button
-  onClick={toggleLanguage}
-  className="ml-2 px-4 py-2 rounded-full text-sm font-medium border border-gray-400 text-gray-700 hover:bg-gray-100 transition"
->
-  {currentLanguage === 'en' ? 'العربية' : 'English'}
-</button>
-
-      </div>
+      
       {/* Hero Section - Apple Style */}
      <section className="pt-16 pb-12 bg-gray-50 md:pt-20 md:pb-16">
   <div className="max-w-3xl mx-auto px-4 sm:px-6">
