@@ -206,12 +206,13 @@ export default function PremiumHealthMarketplace() {
       {/* Minimal Language Toggle */}
       <div className="fixed top-6 right-6 z-50">
        
- <button 
-          onClick={toggleLanguage}
-          className="text-gray-600 hover:text-black text-sm uppercase tracking-wide border border-gray-300 px-3 py-2 bg-white/90 backdrop-blur-sm"
-        >
-          {currentLanguage === 'en' ? 'العربية' : 'English'}
-        </button>
+<button
+  onClick={toggleLanguage}
+  className="ml-2 px-4 py-2 rounded-full text-sm font-medium border border-gray-400 text-gray-700 hover:bg-gray-100 transition"
+>
+  {currentLanguage === 'en' ? 'العربية' : 'English'}
+</button>
+
       </div>
       {/* Hero Section - Apple Style */}
      <section className="pt-16 pb-12 bg-gray-50 md:pt-20 md:pb-16">
