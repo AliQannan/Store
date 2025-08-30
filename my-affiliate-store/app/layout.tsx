@@ -37,10 +37,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
 
- const [currentLanguage, setCurrentLanguage] = useState<'en' | 'ar'>('en');
- const toggleLanguage = () => {
-    setCurrentLanguage(currentLanguage === 'en' ? 'ar' : 'en');
-  };  
+
+  
   return (
     <ClerkProvider>
       <html lang="en" className="dark">
@@ -96,13 +94,6 @@ export default function RootLayout({
 
             {/* Auth buttons */}
             <div className="flex gap-3 items-center">
-              <button
-  onClick={toggleLanguage}
-  className="ml-2 px-4 py-2 rounded-full text-sm font-medium border border-gray-400 text-gray-700 hover:bg-gray-100 transition"
->
-  {currentLanguage === 'en' ? 'العربية' : 'English'}
-</button>
-
               <SignedOut>
                 <SignInButton>
                   <button className="border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition rounded-full font-medium text-sm sm:text-base h-10 sm:h-11 px-5 cursor-pointer">
