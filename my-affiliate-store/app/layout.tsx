@@ -94,22 +94,34 @@ export default function RootLayout({
 
             {/* Auth buttons */}
             <div className="flex gap-3 items-center">
-              <SignedOut>
-                <SignInButton>
-                  <button className="border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition rounded-full font-medium text-sm sm:text-base h-10 sm:h-11 px-5 cursor-pointer">
-                    Sign In
-                  </button>
-                </SignInButton>
-                <SignUpButton>
-                  <button className="bg-green-600 hover:bg-green-700 text-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-11 px-5 cursor-pointer">
-                    Sign Up
-                  </button>
-                </SignUpButton>
-              </SignedOut>
-              <SignedIn>
-                <UserButton />
-              </SignedIn>
-            </div>
+  {/* Language Toggle */}
+  <button
+    onClick={() => {
+      const event = new CustomEvent("toggle-language");
+      window.dispatchEvent(event);
+    }}
+    className="ml-2 px-4 py-2 rounded-full text-sm font-medium border border-gray-400 text-gray-700 hover:bg-gray-100 transition"
+  >
+    العربية / English
+  </button>
+
+  <SignedOut>
+    <SignInButton>
+      <button className="border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition rounded-full font-medium text-sm sm:text-base h-10 sm:h-11 px-5 cursor-pointer">
+        Sign In
+      </button>
+    </SignInButton>
+    <SignUpButton>
+      <button className="bg-green-600 hover:bg-green-700 text-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-11 px-5 cursor-pointer">
+        Sign Up
+      </button>
+    </SignUpButton>
+  </SignedOut>
+  <SignedIn>
+    <UserButton />
+  </SignedIn>
+</div>
+
           </header>
 
           {/* Page content */}
