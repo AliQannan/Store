@@ -87,12 +87,7 @@ export default function RootLayout({
                   <button className="bg-green-600 hover:bg-green-700 text-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-11 px-5 cursor-pointer">
                     Sign Up
                   </button>
-                   <button 
-          onClick={toggleLanguage}
-          className="text-gray-600 hover:text-black text-sm uppercase tracking-wide border border-gray-300 px-3 py-2 bg-white/90 backdrop-blur-sm"
-        >
-          {currentLanguage === 'en' ? 'العربية' : 'English'}
-        </button>
+                  
       </div>
                 </SignUpButton>
               </SignedOut>
